@@ -12,3 +12,11 @@ left join Register r on u.user_id=r.user_id
 where r.contest_id is not null
 group by r.contest_id
 order by percentage Desc,r.contest_id asc ;
+
+
+
+--Queries Quality and Percentage
+SELECT query_name ,
+round(avg(rating*1.0/position),2) as quality ,
+round(sum(case when rating<3 then 1 else 0 end )*100/count(*),2) as poor_query_percentage from Queries
+group by query_name ;
